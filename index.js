@@ -25,17 +25,17 @@ function letterInput () {
             message: "Guess a letter",
             validate: function(inputLetter) {
                 if(unguessedLetters.indexOf(inputLetter) > -1) {
-                    ungessedLetters.splice(unguessedLetters.indexOf(inputLetter), 1)
+                    unguessedLetters.splice(unguessedLetters.indexOf(inputLetter), 1);
                     return true;
                 }
-                ungessedLetters.splice(unguessedLetters.indexOf(inputLetter), 1)
+                unguessedLetters.splice(unguessedLetters.indexOf(inputLetter), 1)
                 return 'Please enter a valid letter'
             }
         }
     ]).then((answer) => {
-        temp.checkWord(answer) //test
-        console.log(temp.word); //test
-        console.log(temp.displayWord()); //test
+        selectedWord.checkWord(answer) //test
+        console.log(selectedWord.word); //test
+        console.log(selectedWord.displayWord()); //test
     })
 }
 
