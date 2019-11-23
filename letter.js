@@ -5,9 +5,12 @@ class Letter {
 
     };
     wordVisual() {
+        if (this.letter === " ") {
+            return " "
+        }
         if (this.isGuessed) {
             return this.letter
-        } 
+        }
         return "_"
     }
     checkLetter(guessLetter) {
