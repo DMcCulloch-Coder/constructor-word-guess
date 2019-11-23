@@ -19,16 +19,14 @@ class Word {
             tempArr.push(this.word[i].wordVisual());
         }
         let temp = tempArr.join('');
-        console.log(temp);
+        return temp;
     }
-    
-    //fUNCTION WITH CHECK LETTER
+    checkWord(guessedLetter) {
+
+        for (let i = 0; i < this.word.length; i++) {
+            this.word[i].checkLetter(guessedLetter);
+        }
+    }
 }
-
-
-let temp = new Word("elephant"); //test
-temp.initArray(); //test
-console.log(temp.word); //test
-temp.displayWord(); //test
 
 module.exports = Word;
