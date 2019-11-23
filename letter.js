@@ -14,7 +14,7 @@ class Letter {
         return "_"
     }
     checkLetter(guessLetter) {
-        if(guessLetter === this.letter) {
+        if(guessLetter === this.letter || this.letter === " ") {
             this.isGuessed = true
         }
     }
