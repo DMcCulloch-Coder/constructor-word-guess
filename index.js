@@ -15,8 +15,6 @@ function pickAWord () {
 }
 
 function startGame() {
-    console.log(chalk.bgCyan.blackBright.bold("Hello World!")) //test
-
     answer = wordBank[pickAWord()]
     selectedWord = new Word(answer);
     selectedWord.initArray();
@@ -48,6 +46,7 @@ function letterInput () {
             name: "guess",
             message: "Guess a letter",
             validate: function(inputLetter) {
+                inputLetter = inputLetter.toLowerCase();
                 if(unguessedLetters.indexOf(inputLetter) > -1) {
                     unguessedLetters.splice(unguessedLetters.indexOf(inputLetter), 1);
                     return true;
