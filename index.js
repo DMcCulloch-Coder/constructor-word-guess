@@ -8,14 +8,10 @@ const wordBank = ['pikachu', 'bulbasaur', 'charmander', 'greninja', 'litten', 'v
 let unguessedLetters = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
 let selectedWord;
 let answer;
+let guessesLeft = 10;
 
 function pickAWord () {
     return Math.floor(Math.random() * wordBank.length);
-}
-
-function reset() {
-    unguessedLetters = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
-
 }
 
 function startGame() {
@@ -32,10 +28,15 @@ function checkWin() {
     if(!selectedWord.displayWord().includes("_")) {
         console.log(chalk.green(`The word was ${answer}`))
         console.log(chalk.green('You Won!!'))
-        reset();
     } else {
-        console.log(selectedWord.displayWord());
-        letterInput()
+        if(guessesLeft) {
+            console.log(selectedWord.displayWord());
+            console.log(chalk.blue(`Guesses Left: ${guessesLeft}`))
+            letterInput()
+        } else {
+            console.log(chalk.red(`The word was ${answer}`))
+            console.log(chalk.red('You Lost!!'))
+        }
     }
     
 }
@@ -56,7 +57,11 @@ function letterInput () {
             }
         }
     ]).then((answer) => {
+        let temp = selectedWord.displayWord()
         selectedWord.checkWord(answer.guess)
+        if(temp === selectedWord.displayWord()) {
+            guessesLeft--;
+        }
         checkWin();
     })
 }
