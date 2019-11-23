@@ -4,10 +4,10 @@ const chalk = require('chalk');
 
 const Word = require('./word');
 
-//const wordBank = ['pikachu', 'bulbasaur', 'charmander', 'greninja', 'litten', 'vulpix', 'muk', 'jigglypuff', 'magikarp', 'eevee', 'mewtwo']
-const wordBank = ['litten']
+const wordBank = ['pikachu', 'bulbasaur', 'charmander', 'greninja', 'litten', 'vulpix', 'muk', 'jigglypuff', 'magikarp', 'eevee', 'mewtwo']
 let unguessedLetters = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
 let selectedWord;
+let answer;
 
 function pickAWord () {
     return Math.floor(Math.random() * wordBank.length);
@@ -21,7 +21,8 @@ function reset() {
 function startGame() {
     console.log(chalk.bgCyan.blackBright.bold("Hello World!")) //test
 
-    selectedWord = new Word(wordBank[pickAWord()]);
+    answer = wordBank[pickAWord()]
+    selectedWord = new Word(answer);
     selectedWord.initArray();
     letterInput();
 
@@ -29,9 +30,10 @@ function startGame() {
 
 function checkWin() {
     if(!selectedWord.displayWord().includes("_")) {
-        console.log('win')
+        console.log(chalk.green(`The word was ${answer}`))
+        console.log(chalk.green('You Won!!'))
+        reset();
     } else {
-        console.log(selectedWord.word);
         console.log(selectedWord.displayWord());
         letterInput()
     }
