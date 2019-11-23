@@ -4,7 +4,8 @@ const chalk = require('chalk');
 
 const Word = require('./word');
 
-const wordBank = ['pikachu', 'bulbasaur', 'charmander', 'greninja', 'litten', 'vulpix', 'muk', 'jigglypuff', 'magikarp', 'eevee', 'mewtwo']
+//const wordBank = ['pikachu', 'bulbasaur', 'charmander', 'greninja', 'litten', 'vulpix', 'muk', 'jigglypuff', 'magikarp', 'eevee', 'mewtwo']
+const wordBank = ['litten']
 let unguessedLetters = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
 let selectedWord;
 
@@ -15,6 +16,26 @@ function pickAWord () {
 function reset() {
     unguessedLetters = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
 
+}
+
+function startGame() {
+    console.log(chalk.bgCyan.blackBright.bold("Hello World!")) //test
+
+    selectedWord = new Word(wordBank[pickAWord()]);
+    selectedWord.initArray();
+    letterInput();
+
+}
+
+function checkWin() {
+    if(!selectedWord.displayWord().includes("_")) {
+        console.log('win')
+    } else {
+        console.log(selectedWord.word);
+        console.log(selectedWord.displayWord());
+        letterInput()
+    }
+    
 }
 
 function letterInput () {
@@ -33,21 +54,10 @@ function letterInput () {
             }
         }
     ]).then((answer) => {
-        selectedWord.checkWord(answer) //test
-        console.log(selectedWord.word); //test
-        console.log(selectedWord.displayWord()); //test
+        selectedWord.checkWord(answer.guess)
+        checkWin();
     })
 }
-
-function startGame() {
-    selectedWord = new Word(wordBank[pickAWord()]);
-    selectedWord.initArray();
-    letterInput();
-
-}
-
-
-console.log(chalk.bgCyan.blackBright.bold("Hello World!")) //test
 
 startGame()
 

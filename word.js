@@ -22,9 +22,9 @@ class Word {
         return temp;
     }
     checkWord(guessedLetter) {
-
         for (let i = 0; i < this.word.length; i++) {
             this.word[i].checkLetter(guessedLetter);
+            
         }
     }
 }
